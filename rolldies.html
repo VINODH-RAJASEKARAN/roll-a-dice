@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Roll dice</title>
@@ -40,8 +41,8 @@
 <body translate="no">
   <div class="centered">
     <div style="margin-top: 50px;">
-      <div class="container">
-        <img id="dice" class="dice" src="res_pub/Die00.png">
+      <div id="dice-container" class="container">
+        <!-- <img id="dice0" class="dice" src="res_pub/Die00.png"> -->
       </div>
       <div style="margin-top: 20px;">
         <button id="dice-button" class="dice-button" type="button" onclick="rollDice();">Roll the dice</button>
@@ -49,59 +50,77 @@
     </div>
   </div>
 </body>
+
 </html>
 <script>
   var path = '';
-  const dice = document.querySelector('#dice');
+  //const dice = document.querySelector('#dice');
   const diceButton = document.getElementById("dice-button");
+  const diceContainer = document.getElementById("dice-container");
+
+  for (let i = 0; i <= 6; i++) {
+    let elem = document.createElement("img");
+    if (i == 0) {
+      elem.setAttribute("src", "res_pub/Die" + i + ".png");
+      elem.style.display = 'block';
+    } else {
+      elem.setAttribute("src", "res_pub/Die" + i + ".svg");
+      elem.style.display = 'none';
+    }
+    elem.setAttribute("alt", "dice" + i);
+    elem.setAttribute("class", "dice");
+    elem.setAttribute("id", "dice" + i);
+    diceContainer.appendChild(elem);
+  }
 
   function randomIntFromInterval() {
     return Math.floor(Math.random() * 6) + 1;
   }
 
-  function changeDiceImagePath(result) {
+  function showChoosenFace(result) {
+    //console.log(result+"\n");
     switch (result) {
+      case 0:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
       case 1:
-        path = "res_pub/Die1.svg";
+        document.getElementById("dice" + result).style.display = 'block';
         break;
       case 2:
-        path = "res_pub/Die2.svg";
+        document.getElementById("dice" + result).style.display = 'block';
         break;
       case 3:
-        path = "res_pub/Die3.svg";
+        document.getElementById("dice" + result).style.display = 'block';
         break;
       case 4:
-        path = "res_pub/Die4.svg";
+        document.getElementById("dice" + result).style.display = 'block';
         break;
       case 5:
-        path = "res_pub/Die5.svg";
+        document.getElementById("dice" + result).style.display = 'block';
         break;
       case 6:
-        path = "res_pub/Die6.svg";
-        break;
-      default:
-        path = "res_pub/Die00.png";
+        document.getElementById("dice" + result).style.display = 'block';
         break;
     }
   }
 
-  function changeDiceNumber() {
-    dice.setAttribute("src", path);
+  function blockAllElement() {
+    for (let i = 0; i <= 6; i++) {
+        document.getElementById("dice" + i).style.display = 'none';
+    }
   }
 
   function rollDice() {
     diceButton.disabled = true;
-    changeDiceImagePath(-1);
-    changeDiceNumber();
-    setTimeout(rollDiceLogic, 1300);
+    blockAllElement();
+    showChoosenFace(0);
+    setTimeout(rollDiceLogic, 1000);
     return false;
   }
 
   function rollDiceLogic() {
-    // var randomDiceNumber = randomIntFromInterval();
-    // console.log(randomDiceNumber);
-    changeDiceImagePath(randomIntFromInterval());
-    changeDiceNumber();
+    blockAllElement();
+    showChoosenFace(randomIntFromInterval());
     diceButton.disabled = false;
   }
 </script>
