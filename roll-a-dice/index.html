@@ -1,0 +1,126 @@
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roll dice</title>
+  <style>
+    .dice {
+      width: 150px;
+      height: 150px;
+      padding: 0%;
+      margin: 0px;
+    }
+
+    .dice-button {
+      width: 180px;
+      height: 100px;
+      font-size: 25px;
+      padding: 0%;
+      margin: 0px;
+    }
+
+    .centered {
+      margin: 0px;
+      display: flex;
+      width: 100vw;
+      /*height: 100vh;*/
+      justify-content: center;
+      /* align-items: center; */
+    }
+
+    .container {
+      margin: 0px;
+      /* outline: dashed 1px black; 
+      /* Center child horizontally*/
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body translate="no">
+  <div class="centered">
+    <div style="margin-top: 50px;">
+      <div id="dice-container" class="container">
+        <!-- <img id="dice0" class="dice" src="res_pub/Die00.png"> -->
+      </div>
+      <div style="margin-top: 20px;">
+        <button id="dice-button" class="dice-button" type="button" onclick="rollDice();">Roll the dice</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  var path = '';
+  //const dice = document.querySelector('#dice');
+  const diceButton = document.getElementById("dice-button");
+  const diceContainer = document.getElementById("dice-container");
+
+  for (let i = 0; i <= 6; i++) {
+    let elem = document.createElement("img");
+    if (i == 0) {
+      elem.setAttribute("src", "res_pub/Die" + i + ".png");
+      elem.style.display = 'block';
+    } else {
+      elem.setAttribute("src", "res_pub/Die" + i + ".svg");
+      elem.style.display = 'none';
+    }
+    elem.setAttribute("alt", "dice" + i);
+    elem.setAttribute("class", "dice");
+    elem.setAttribute("id", "dice" + i);
+    diceContainer.appendChild(elem);
+  }
+
+  function randomIntFromInterval() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  function showChoosenFace(result) {
+    //console.log(result+"\n");
+    switch (result) {
+      case 0:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+      case 1:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+      case 2:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+      case 3:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+      case 4:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+      case 5:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+      case 6:
+        document.getElementById("dice" + result).style.display = 'block';
+        break;
+    }
+  }
+
+  function blockAllElement() {
+    for (let i = 0; i <= 6; i++) {
+        document.getElementById("dice" + i).style.display = 'none';
+    }
+  }
+
+  function rollDice() {
+    diceButton.disabled = true;
+    blockAllElement();
+    showChoosenFace(0);
+    setTimeout(rollDiceLogic, 1000);
+    return false;
+  }
+
+  function rollDiceLogic() {
+    blockAllElement();
+    showChoosenFace(randomIntFromInterval());
+    diceButton.disabled = false;
+  }
+</script>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./qrcode.min.js"></script>
+    <title>QR Code Generate</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Ensure the body takes up at least the full viewport height */
+            margin: 0;
+            /* Remove default body margin */
+        }
+
+        #qrcode {
+            display: block;
+            /* Makes the QR code container a block element so it takes up the full width available */
+            margin: 10px auto;
+            /* Centers horizontally and adds some margin top/bottom */
+            width: 143px;
+            /* Or whatever width you prefer */
+            height: 143px;
+            /* Height matching the width for a square QR code */
+        }
+
+        #snippet {
+            width: 90vw;
+            /* Use viewport units for responsive sizing */
+            max-width: 400px;
+            /* Limit maximum size */
+            margin: 10px auto;
+            /* Center elements */
+            box-sizing: border-box;
+            /* Include padding and border in element's total width and height */
+        }
+
+        #snippet {
+            height: 150px;
+            /* Give textarea a height */
+            resize: vertical;
+            /* Allow vertical resizing */
+        }
+
+        button {
+            display: block;
+            /* Make button take up full width */
+            width: 90vw;
+            max-width: 400px;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1em;
+            /* Responsive button text */
+            border: none;
+            /* Optional styling */
+            background-color: #4CAF50;
+            /* Example background color */
+            color: white;
+            /* Example text color */
+            cursor: pointer;
+            /* Indicate clickable */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <div id="qrcode"></div>
+        <textarea id="snippet"></textarea>
+        <button onclick="generateQrCode();">Generate QRCode</button>
+    </div>
+
+    <script>
+        document.getElementById("snippet").placeholder = "Enter text here...";
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "",
+            width: 142,
+            height: 142,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        async function generateQrCode() {
+            qrcode.clear(); // clear the code.
+            qrcode.makeCode((document.getElementById('snippet').value).trim());// make another code.
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+
+<!-- <html>
+<script src="./qrcode.min.js"></script>
+
+<body>
+    <div id="qrcode"></div>
+    <textarea id="snippet"></textarea>
+    <button onclick="generateQrCode();">Generate QRCode</button>
+
+    <script>
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "",
+            width: 128,
+            height: 128,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        async function generateQrCode() {
+            qrcode.clear(); // clear the code.
+            qrcode.makeCode((document.getElementById('snippet').value).trim());// make another code.
+        }
+
+    </script>
+</body>
+
+</html> -->
