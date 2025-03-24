@@ -61,16 +61,17 @@
   </style>
 </head>
 
-<body translate="no">
-  
+<body translate="no" onload="refreshAddition();">
+
   <div class="centered">
-   
+
     <div style="margin-top: 0px;">
       <div id="dice-container" class="container">
         <!-- <img id="dice0" class="dice" src="res_pub/Die00.png"> -->
       </div>
       <div style="margin-top: 5px;">
         <button id="dice-button" class="dice-button" type="button" onclick="calculateAddition();">Check</button>
+        <button id="refresh-button" class="dice-button" type="button" onclick="refreshAddition();">Refresh</button>
       </div>
     </div>
   </div>
@@ -78,57 +79,59 @@
 
 </html>
 <script>
-  var path = '';
   //const dice = document.querySelector('#dice');
   const diceButton = document.getElementById("dice-button");
+  const refreshButton = document.getElementById("refresh-button");
   const diceContainer = document.getElementById("dice-container");
 
-  var randInt = 0;
-  var elemDiv1 = document.createElement("div");
-  elemDiv1.setAttribute("class", "cell");
-  var result = 0;
-  for (let i = 1; i <= 10; i++) {
+  function refreshAddition() {
+    diceContainer.innerHTML = '';
+    var randInt = 0;
+    var elemDiv1 = document.createElement("div");
+    elemDiv1.setAttribute("class", "cell");
+    var result = 0;
+    for (let i = 1; i <= 10; i++) {
 
-    let elem = document.createElement("img");
-    randInt = randomIntFromInterval()
-    result += randInt;
-    elem.setAttribute("src", "res_pub/Die" + randInt + ".svg");
-    elem.setAttribute("alt", "dice" + i);
-    elem.setAttribute("class", "dice");
-    elem.setAttribute("id", "dice" + i);
-    let elemSpan1 = document.createElement('span');
-    elemSpan1.className = 'content-span';
-    if (i % 2 != 0) {
-      elemDiv1.appendChild(elem);
-      elemDiv1.appendChild(elemSpan1);
-      elemSpan1.innerText = '+';
-    } else {
-      elemDiv1.appendChild(elem);
-      elemDiv1.appendChild(elemSpan1);
-      elemSpan1.innerText = '=';
-      let elemText = document.createElement("input");
-      elemText.setAttribute("type", "number");
-      elemText.setAttribute("name", "diceText" + i);
-      elemText.setAttribute("value", "");
-      elemText.setAttribute("id", "diceText" + i);
-      elemText.setAttribute("maxlength", 2);
-      elemText.setAttribute("placeholder", "0");
-      elemText.className = 'answer-text';
-      let elemTextHidden = document.createElement("input");
-      elemTextHidden.setAttribute("type", "hidden");
-      elemTextHidden.setAttribute("name", "diceHiddenText" + i);
-      elemTextHidden.setAttribute("value", result);
-      elemTextHidden.setAttribute("id", "diceHiddenText" + i);
-      elemTextHidden.setAttribute("maxlength", 2);
-      elemTextHidden.className = 'answer-hidden';
-      elemDiv1.appendChild(elemText);
-      elemDiv1.appendChild(elemTextHidden);
-      diceContainer.appendChild(elemDiv1);
-      result = 0;
-      elemDiv1 = document.createElement("div");
-      elemDiv1.setAttribute("class", "cell");
+      let elem = document.createElement("img");
+      randInt = randomIntFromInterval()
+      result += randInt;
+      elem.setAttribute("src", "res_pub/Die" + randInt + ".svg");
+      elem.setAttribute("alt", "dice" + i);
+      elem.setAttribute("class", "dice");
+      elem.setAttribute("id", "dice" + i);
+      let elemSpan1 = document.createElement('span');
+      elemSpan1.className = 'content-span';
+      if (i % 2 != 0) {
+        elemDiv1.appendChild(elem);
+        elemDiv1.appendChild(elemSpan1);
+        elemSpan1.innerText = '+';
+      } else {
+        elemDiv1.appendChild(elem);
+        elemDiv1.appendChild(elemSpan1);
+        elemSpan1.innerText = '=';
+        let elemText = document.createElement("input");
+        elemText.setAttribute("type", "number");
+        elemText.setAttribute("name", "diceText" + i);
+        elemText.setAttribute("value", "");
+        elemText.setAttribute("id", "diceText" + i);
+        elemText.setAttribute("maxlength", 2);
+        elemText.setAttribute("placeholder", "0");
+        elemText.className = 'answer-text';
+        let elemTextHidden = document.createElement("input");
+        elemTextHidden.setAttribute("type", "hidden");
+        elemTextHidden.setAttribute("name", "diceHiddenText" + i);
+        elemTextHidden.setAttribute("value", result);
+        elemTextHidden.setAttribute("id", "diceHiddenText" + i);
+        elemTextHidden.setAttribute("maxlength", 2);
+        elemTextHidden.className = 'answer-hidden';
+        elemDiv1.appendChild(elemText);
+        elemDiv1.appendChild(elemTextHidden);
+        diceContainer.appendChild(elemDiv1);
+        result = 0;
+        elemDiv1 = document.createElement("div");
+        elemDiv1.setAttribute("class", "cell");
+      }
     }
-
   }
 
   function randomIntFromInterval() {
