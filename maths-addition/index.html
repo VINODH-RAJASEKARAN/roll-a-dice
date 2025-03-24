@@ -1,0 +1,189 @@
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roll dice</title>
+  <style>
+    .dice {
+      width: 100px;
+      height: 100px;
+      padding: 0%;
+      margin: 0px;
+    }
+
+    .dice-button {
+      width: 80px;
+      height: 50px;
+      font-size: 25px;
+      padding: 0%;
+      margin: 0px;
+    }
+
+    .centered {
+      margin: 0px;
+      display: flex;
+      width: 100vw;
+      /*height: 100vh;*/
+      justify-content: center;
+      /* align-items: center; */
+    }
+
+    .container {
+      margin: 0px;
+      /* outline: dashed 1px black; 
+      /* Center child horizontally*/
+      display: block;
+      justify-content: center;
+    }
+
+    .cell {
+      margin: 0px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .content-span {
+      margin: 0px;
+      display: inline-block;
+      vertical-align: middle;
+      font-family: Arial, Helvetica, sans-serif;
+      font: 3em sans-serif;
+    }
+
+    .answer-text {
+      margin: 0px;
+      width: 70;
+      display: inline-block;
+      vertical-align: middle;
+      font-family: Arial, Helvetica, sans-serif;
+      font: 3em sans-serif;
+    }
+  </style>
+</head>
+
+<body translate="no">
+  <div style="margin-top: 20px;">
+    <button id="dice-button" class="dice-button" type="button" onclick="calculateAddition();">Check</button>
+  </div>
+  <div class="centered">
+   
+    <div style="margin-top: 0px;">
+      <div id="dice-container" class="container">
+        <!-- <img id="dice0" class="dice" src="res_pub/Die00.png"> -->
+      </div>
+      
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  var path = '';
+  //const dice = document.querySelector('#dice');
+  const diceButton = document.getElementById("dice-button");
+  const diceContainer = document.getElementById("dice-container");
+
+  var randInt = 0;
+  var elemDiv1 = document.createElement("div");
+  elemDiv1.setAttribute("class", "cell");
+  var result = 0;
+  for (let i = 1; i <= 10; i++) {
+
+    let elem = document.createElement("img");
+    randInt = randomIntFromInterval()
+    result += randInt;
+    elem.setAttribute("src", "res_pub/Die" + randInt + ".svg");
+    elem.setAttribute("alt", "dice" + i);
+    elem.setAttribute("class", "dice");
+    elem.setAttribute("id", "dice" + i);
+    let elemSpan1 = document.createElement('span');
+    elemSpan1.className = 'content-span';
+    if (i % 2 != 0) {
+      elemDiv1.appendChild(elem);
+      elemDiv1.appendChild(elemSpan1);
+      elemSpan1.innerText = '+';
+    } else {
+      elemDiv1.appendChild(elem);
+      elemDiv1.appendChild(elemSpan1);
+      elemSpan1.innerText = '=';
+      let elemText = document.createElement("input");
+      elemText.setAttribute("type", "number");
+      elemText.setAttribute("name", "diceText" + i);
+      elemText.setAttribute("value", "");
+      elemText.setAttribute("id", "diceText" + i);
+      elemText.setAttribute("maxlength", 2);
+      elemText.setAttribute("placeholder", "0");
+      elemText.className = 'answer-text';
+      let elemTextHidden = document.createElement("input");
+      elemTextHidden.setAttribute("type", "hidden");
+      elemTextHidden.setAttribute("name", "diceHiddenText" + i);
+      elemTextHidden.setAttribute("value", result);
+      elemTextHidden.setAttribute("id", "diceHiddenText" + i);
+      elemTextHidden.setAttribute("maxlength", 2);
+      elemTextHidden.className = 'answer-hidden';
+      elemDiv1.appendChild(elemText);
+      elemDiv1.appendChild(elemTextHidden);
+      diceContainer.appendChild(elemDiv1);
+      result = 0;
+      elemDiv1 = document.createElement("div");
+      elemDiv1.setAttribute("class", "cell");
+    }
+
+  }
+
+  function randomIntFromInterval() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  function calculateAddition() {
+    let text2 = document.getElementById("diceText2");
+    if (text2 == null || text2.value == null) { text2.value = 0 }
+    var hiddentext2 = document.getElementById("diceHiddenText2").value;
+
+    if (text2.value != hiddentext2) {
+      text2.style.color = "#ff0000";
+    } else {
+      text2.style.color = "#00ff00";
+    }
+
+    let text4 = document.getElementById("diceText4");
+    if (text4 == null || text4.value == null) { text4.value = 0 }
+    var hiddentext4 = document.getElementById("diceHiddenText4").value;
+
+    if (text4.value != hiddentext4) {
+      text4.style.color = "#ff0000";
+    } else {
+      text4.style.color = "#00ff00";
+    }
+
+    let text6 = document.getElementById("diceText6");
+    if (text6 == null || text6.value == null) { text6.value = 0 }
+    var hiddentext6 = document.getElementById("diceHiddenText6").value;
+
+    if (text6.value != hiddentext6) {
+      text6.style.color = "#ff0000";
+    } else {
+      text6.style.color = "#00ff00";
+    }
+
+    let text8 = document.getElementById("diceText8");
+    if (text8 == null || text8.value == null) { text8.value = 0 }
+    var hiddentext8 = document.getElementById("diceHiddenText8").value;
+
+    if (text8.value != hiddentext8) {
+      text8.style.color = "#ff0000";
+    } else {
+      text8.style.color = "#00ff00";
+    }
+
+    let text10 = document.getElementById("diceText10");
+    if (text10 == null || text10.value == null) { text10.value = 0 }
+    var hiddentext10 = document.getElementById("diceHiddenText10").value;
+
+    if (text10.value != hiddentext10) {
+      text10.style.color = "#ff0000";
+    } else {
+      text10.style.color = "#00ff00";
+    }
+  }
+</script>
