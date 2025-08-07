@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SS Tuition & Computer Training Center - Unlock Your Child's Potential!</title>
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Best Tuition Center for Pre-KG to 5th Standard and Computer Classes including iOS, Android, Java, React, and more. Personalized attention, expert educators, and hands-on learning.">
-    <meta name="keywords" content="tuition center, computer classes, kids tuition, CBSE tuition, Pre-KG, LKG, UKG, 1st standard, 2nd standard, 3rd standard, 4th standard, 5th standard, iOS development, Android development, Java, React, Node.js, Express.js, MongoDB, SQL, Swift, Kotlin, SwiftUI, React Native, best tuition near me, computer training, coding classes, programming classes, after school classes, tech classes for kids, Europe tuition, US tuition, professional tuition center, hands-on learning, expert instructors, personalized attention, small class size, engaging environment, real-time projects, flexible schedule, comprehensive curriculum">
+    <meta name="description" content="Best Tuition Center for Pre-KG to 6th Standard and Computer Classes including iOS, Android, Java, React, and more. Personalized attention, expert educators, and hands-on learning.">
+    <meta name="keywords" content="tuition center, computer classes, kids tuition, CBSE tuition, Matriculation tuition, Pre-KG, LKG, UKG, 1st standard, 2nd standard, 3rd standard, 4th standard, 5th standard, 6th standard, iOS development, Android development, Java, React, Node.js, Express.js, MongoDB, SQL, Swift, Kotlin, SwiftUI, React Native, best tuition near me, computer training, coding classes, programming classes, after school classes, tech classes for kids, Europe tuition, US tuition, professional tuition center, hands-on learning, expert instructors, personalized attention, small class size, engaging environment, real-time projects, flexible schedule, comprehensive curriculum">
     <meta name="robots" content="index, follow">
     <!-- Open Graph for social sharing -->
     <meta property="og:title" content="SS Tuition & Computer Training Center - Unlock Your Child's Potential!">
@@ -66,6 +66,41 @@
             letter-spacing: 0.02em;
             color: #ffab00;
             text-shadow: 0 1px 4px rgba(44, 62, 80, 0.10);
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1em;
+            background: #eaf6ff;
+            border-radius: 0.5em;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 0.7em 0.2em;
+            background: none;
+            border: none;
+            font-size: 1em;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .section-title {
             color: var(--primary);
@@ -178,6 +213,13 @@
                 min-width: 70px;
                 padding: 0.4em 0.7em;
             }
+            .tabs {
+                flex-direction: column;
+            }
+            .tab-btn {
+                font-size: 1em;
+                padding: 0.7em 0;
+            }
         }
     </style>
 </head>
@@ -188,7 +230,13 @@
             <h2>Unlock Your Child's Potential!</h2>
         </div>
 
-        <div>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('tuition')">Tuition</button>
+            <button class="tab-btn" onclick="showTab('computer')">Computer Classes</button>
+            <button class="tab-btn" onclick="showTab('contact')">Contact</button>
+        </div>
+
+        <div id="tuition" class="tab-content active">
             <span class="section-title">Tuition Classes Available For:</span>
             <div class="tuition-blocks">
                 <div class="tuition-block">Pre-KG</div>
@@ -199,73 +247,86 @@
                 <div class="tuition-block">3rd Standard</div>
                 <div class="tuition-block">4th Standard</div>
                 <div class="tuition-block">5th Standard</div>
+                <div class="tuition-block">6th Standard</div>
+            </div>
+            <div class="why-choose">
+                <span class="section-title">Why Choose Us?</span>
+                <ul>
+                    <li><strong>Experienced Educators:</strong> Our qualified teachers are dedicated to nurturing young minds.</li>
+                    <li><strong>Personalized Attention:</strong> Small class sizes ensure individual focus on each student.</li>
+                    <li><strong>Engaging Learning Environment:</strong> A well-equipped and friendly space that encourages learning.</li>
+                    <li><strong>CBSE Curriculum:</strong> Comprehensive coverage of the CBSE syllabus with interactive teaching methods.</li>
+                    <li><strong>Matriculation Curriculum:</strong> Full support for Matriculation syllabus with tailored teaching strategies.</li>
+                </ul>
             </div>
         </div>
 
-        <div class="why-choose">
-            <span class="section-title">Why Choose Us?</span>
-            <ul>
-                <li><strong>Experienced Educators:</strong> Our qualified teachers are dedicated to nurturing young minds.</li>
-                <li><strong>Personalized Attention:</strong> Small class sizes ensure individual focus on each student.</li>
-                <li><strong>Engaging Learning Environment:</strong> A well-equipped and friendly space that encourages learning.</li>
-                <li><strong>CBSE Curriculum:</strong> Comprehensive coverage of the CBSE syllabus with interactive teaching methods.</li>
-                <li><strong>Matriculation Curriculum:</strong> Full support for Matriculation syllabus with tailored teaching strategies.</li>
-            </ul>
+        <div id="computer" class="tab-content">
+            <div class="computer-section">
+                <h2>🖥️ Computer Classes Available</h2>
+                <p style="margin:0.3em 0 0.5em 0;">Enhance Your Skills with Real-Time Projects!</p>
+                <span class="section-title">Courses Offered:</span>
+                <ul>
+                    <li>iOS Development</li>
+                    <li>Swift Programming</li>
+                    <li>SwiftUI</li>
+                    <li>Android Development</li>
+                    <li>Kotlin Programming</li>
+                    <li>Java Programming</li>
+                    <li>Node.js</li>
+                    <li>Express.js</li>
+                    <li>React.js</li>
+                    <li>React Native</li>
+                    <li>MongoDB</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+            <div class="why-computer">
+                <span class="section-title">Why Choose Our Classes?</span>
+                <ul>
+                    <li><strong>Hands-On Learning:</strong> Engage in real-time projects that prepare you for the industry.</li>
+                    <li><strong>Expert Instructors:</strong> Learn from experienced professionals with extensive industry knowledge.</li>
+                    <li><strong>Flexible Schedule:</strong> Classes available at convenient times to fit your lifestyle.</li>
+                    <li><strong>Comprehensive Curriculum:</strong> Covering the latest technologies and best practices.</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="computer-section">
-            <h2>🖥️ Computer Classes Available</h2>
-            <p style="margin:0.3em 0 0.5em 0;">Enhance Your Skills with Real-Time Projects!</p>
-            <span class="section-title">Courses Offered:</span>
-            <ul>
-                <li>iOS Development</li>
-                <li>Swift Programming</li>
-                <li>SwiftUI</li>
-                <li>Android Development</li>
-                <li>Kotlin Programming</li>
-                <li>Java Programming</li>
-                <li>Node.js</li>
-                <li>Express.js</li>
-                <li>React.js</li>
-                <li>React Native</li>
-                <li>MongoDB</li>
-                <li>SQL</li>
-            </ul>
+        <div id="contact" class="tab-content">
+            <div class="contact">
+                <strong>Location:</strong> No 3, SIVET College Road, Gowrivakkam, Chennai 600 073. Opposite Mynds Badminton Court.<br>
+                <br>
+                <strong>Scan for Directions</strong><br>
+                <img src="location-map.png" alt="Location QR Code" style="vertical-align:middle;border-radius:0.3em;border:1px solid #eee;">
+                <br>
+                <a href="https://www.google.com/maps/place/MYNDZ+BADMINTON/@12.9224775,80.1634391,17z/data=!4m14!1m7!3m6!1s0x3a525fcd7c195bef:0xdd2c25af70037387!2sMYNDZ+BADMINTON!8m2!3d12.9224723!4d80.166014!16s%2Fg%2F11rrk1kggp!3m5!1s0x3a525fcd7c195bef:0xdd2c25af70037387!8m2!3d12.9224723!4d80.166014!16s%2Fg%2F11rrk1kggp?entry=ttu&g_ep=EgoyMDI1MDgwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="display:inline-block;margin:0.5em 0;">Click for Direction</a><br>
+                <br>
+                <strong>Contact Person:</strong> Kavitha K<br>
+                <strong>Contact:</strong> +91 9677201068<br>
+                <strong>Email:</strong> <a href="mailto:vinodh.it@gmail.com">vinodh.it@gmail.com</a><br>
+                <br>
+                <strong>Website QR Code</strong><br>
+                <img src="website_url.png" alt="Website QR Code" style="vertical-align:middle;border-radius:0.3em;border:1px solid #eee;">
+                <br>
+                <strong>Website:</strong> <a href="https://vinodh-rajasekaran.github.io/roll-a-dice/training/index.html">https://vinodh-rajasekaran.github.io/roll-a-dice/training/index.html</a>
+            </div>
+            <div class="enroll">
+                Enroll Today! Start Building Your Future in Tech!<br>
+                <span>Limited Seats Available!</span>
+            </div>
         </div>
 
-        <div class="why-computer">
-            <span class="section-title">Why Choose Our Classes?</span>
-            <ul>
-                <li><strong>Hands-On Learning:</strong> Engage in real-time projects that prepare you for the industry.</li>
-                <li><strong>Expert Instructors:</strong> Learn from experienced professionals with extensive industry knowledge.</li>
-                <li><strong>Flexible Schedule:</strong> Classes available at convenient times to fit your lifestyle.</li>
-                <li><strong>Comprehensive Curriculum:</strong> Covering the latest technologies and best practices.</li>
-            </ul>
-        </div>
-
-        <div class="contact">
-            <strong>Location:</strong> No 3, SIVET College Road, Gowrivakkam, Chennai 600 073. Opposite Mynds Badminton Court.<br>
-            
-            <br>
-            <strong>Scan for Directions</strong><br>
-            <img src="location-map.png" alt="Location QR Code" style="vertical-align:middle;border-radius:0.3em;border:1px solid #eee;">
-            <br>
-            <a href="https://www.google.com/maps/place/MYNDZ+BADMINTON/@12.9224775,80.1634391,17z/data=!4m14!1m7!3m6!1s0x3a525fcd7c195bef:0xdd2c25af70037387!2sMYNDZ+BADMINTON!8m2!3d12.9224723!4d80.166014!16s%2Fg%2F11rrk1kggp!3m5!1s0x3a525fcd7c195bef:0xdd2c25af70037387!8m2!3d12.9224723!4d80.166014!16s%2Fg%2F11rrk1kggp?entry=ttu&g_ep=EgoyMDI1MDgwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="display:inline-block;margin:0.5em 0;">Click for Direction</a><br>
-            <br>
-            <strong>Contact Person:</strong> [Kavitha K]<br>
-            <strong>Contact:</strong> [+91 9677201068]<br>
-            <strong>Email:</strong> <a href="mailto:vinodh.it@gmail.com">[vinodh.it@gmail.com]</a><br>
-            <strong>Website:</strong> <a href="https://vinodh-rajasekaran.github.io/roll-a-dice/training/index.html">[https://vinodh-rajasekaran.github.io/roll-a-dice/training/index.html]</a>
-        </div>
-
-        <div class="enroll">
-            Enroll Today! Start Building Your Future in Tech!<br>
-            <span>Limited Seats Available!</span>
-        </div>
         <footer style="text-align:center; margin-top:1.5em; font-size:0.95em; color:#888;">
             &copy; <span id="year"></span> Kavitha K. All rights reserved.
         </footer>
         <script>
+            // Tab switching logic
+            function showTab(tabId) {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelector('.tab-btn[onclick="showTab(\'' + tabId + '\')"]').classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            }
             // Automatically update copyright year
             document.getElementById('year').textContent = new Date().getFullYear();
         </script>
