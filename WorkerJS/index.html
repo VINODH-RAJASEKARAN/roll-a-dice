@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+
+<html>
+   <head>
+      <title>Big for loop</title>
+      
+      <script>
+
+if(window.Worker){
+         // Creating new web worker using constructor
+            var worker = new Worker('worker.js');
+              
+              
+            var message = 'Hello';
+          
+            // Sending the message using postMessage
+            worker.postMessage(message);
+              
+            // On response
+            worker.onmessage = function(e) {
+                console.log(e.data);
+            };
+         
+         worker.onerror = function (event) {
+            console.log(event.message, event);
+         };
+} else{
+	alert("Not supported...." );
+}
+         function sayHello() {
+            alert("Hello sir...." );
+         }
+      </script>
+   </head>
+   
+   <body>
+      <div>Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪</div>
+      <input type = "button" onclick = "sayHello();" value = "Say Hello"/>
+   </body>
+</html>

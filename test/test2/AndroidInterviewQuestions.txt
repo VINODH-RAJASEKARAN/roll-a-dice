@@ -1,0 +1,236 @@
+
+Q1.Is fragment inside fragment is possible or nesting fragment is possible ?
+Ans: Yes 
+If Yes -> How did you add fragment inside fragment using xml?
+Ans: No you can't add it through xml, you can add it through programatically.
+
+Q2. How do you nest the fragment through programatically?
+Ans: you can nest a fragment using "getChildFragmentManger"
+
+Q3.How do you refer outer fragment in a nested fragment?
+Ans: using outer fragment using "getParentFragment"
+
+Q4. Ways to update ui thread from a back ground thread in android?
+Ans: 1. Using Async task, onPostExecute method will flawlessly update ui thread.
+Ans: 2. views.post()
+
+From a background thread you can call below code 
+A view may Textview or EditText or Button
+view.post(new Runnable() {
+        public void run() {
+            /* the desired UI update */
+	/For eg. textView.setText("SOME TEXT")
+        }
+    });
+
+Ans: 3.
+From an activity, you can call runOnUiThread() method.
+activity.runOnUiThread(new Runnable() {
+    public void run() {
+        Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
+    }
+});
+
+Ans: 4.
+public void toast(final Context context, final String text) {
+  Handler handler = new Handler(Looper.getMainLooper());
+  handler.post(new Runnable() {
+    public void run() {
+      Toast.makeText(context, text, Toast.DURATION_LONG).show();
+    }
+  })
+}
+
+
+Q3.1 Is it possible to print Toast from non ui thread? 
+Answer: Yes -> Then how?
+Ans:
+public void toast(final Context context, final String text) {
+  Handler handler = new Handler(Looper.getMainLooper());
+  handler.post(new Runnable() {
+    public void run() {
+      Toast.makeText(context, text, Toast.DURATION_LONG).show();
+    }
+  })
+}
+
+
+Q4. How do you restrict or know a multiple instance of a same fragment is added? Is it possible to restrict? How do you know a particular fragment is already there?
+Ans: Yes, it is possible to restrict.
+If yes -> using fragmentmanager-> fragmenttransaction holds the fragment in memory, using "findFragmentByTag" attribute you can restrict
+
+How do you know a particular fragment is already there?
+FragmentManager fManager = getFragmentManager();
+FragmentTransaction fTransaction = fManager.beginTransaction();
+Fragment fragment = null;
+fragment = fManager.findFragmentByTag("uniqueTag");This method allows you to retrieve the instance of a previously added fragment with the given tag
+(Or)
+fragment = fManager.findFragmentById("R.id.fragment_list:);In this method you are going to get the instance of the visible fragment, in this case, the fragment that is in the fragment container
+
+  fTransaction = fManager.beginTransaction();
+  fTransaction.add(new BillSummaryFragment(), "BillSummaryFragment");
+  fTransaction.add(new ItemDescriptionFragment(), "ItemDescriptionFragment");
+  fTransaction.commit();
+  fManager.executePendingTransactions();
+
+// If fragment doesn't exist yet 'fragment' will return null, create new fragment
+if (fragment == null) {
+    fTransaction.add(R.id.fragment_list, new ListFrag(), "uniqueTag");
+}
+else { // re-use the old fragment
+    fTransaction.replace(R.id.fragment_list, fragment, "uniqueTag");
+}
+
+Q4.1
+
+findFragmentByTag Vs findFragmentById
+findFragmentByTag:
+
+This method allows you to retrieve the instance of a previously added fragment with the given tag. This is done the following way:
+
+findFragmentById:
+
+In this method you are going to get the instance of the visible fragment, in this case, the fragment that is in the fragment container. Adding the fragment to the container without tag:
+
+Q5. How do you programatically go to previous fragment in backstack?
+Ans : Using fragmentmager's popBackStack();
+
+Q6:1 How to refresh the UI fragment easily with out touching lifecycle of activity?
+Ans : Using detach() and attach() call will refresh the fragment ui;
+
+6.2.how to tell list view to update or use new data?
+using notifyDataSetChanged()
+6.3. How do you refresh UI of any view (i.e)Textview, Listview, Spinner etc
+using invalidateViews() 
+
+6.4 whether invalidateViews() will update Android Option Menu?
+No invalidateOptionMenu() or supportinvalidateoptionsmenu() will do
+
+How to get call backs like onCreateOptionMenu() and onPrepareOptionMenu() inside fragment
+setHasOptionsMenu(true);
+
+
+Q7:There is a Fragment A-> then from Fragment A loading Fargment B-> then from Fragment B loading Fragment C
+On android hardware back key press what need to do I need to come back like 
+1. Fragment C -> Fragment B -> Fragment A?
+2. Fragment C -> Fragment A?
+
+Question 7.2 is the default behaviour of fragment.
+You can add addToBackStack() will allow the transaction history to be recorded. By using addToBackStack() you can acheive behaviour Fragment C -> Fragment B -> Fragment A.
+
+Q8. Android activity launchModes
+Answer
+1. standard(Default) - Multiple Instance can be created
+2. singleTop - Multiple Instance can be created
+3. singleTask - No
+4. singleInstance - No
+
+Q9. What activity launchModes is the difference? How to restrict only one instanse of activity created through the application, if instance is of an activity is already in back stack which mode will resuse the instance?
+
+1. standard(Default) - Multiple Instance of activity can be created
+2. singleTop - Same as standard multiple Instance can be created, but if the activty instance is in top of stack that time it will not create new instance of activity, it will call existing activity instance along with onNewIntent() callback method is called inside the activity
+3. singleTask - An activity with singleTask launchMode is allowed to have only one activity instance in the specified task system. If there is an existed Activity instance in the specified task system, then it will call existing activity instance along with onNewIntent() callback method is called inside the activity. 
+4. singleInstance - This will create a new Task hold only one Activity. It you call same activity you it will create another task and put that activity in that instance.
+
+
+You can restrict multiple instance using singleTask with task affinity attribute.
+You can restrict multiple instance using singleInstance with task affinity attribute also.
+
+
+Q10. How to getting a Result from an Activity ?
+Ans: using 'startActivityForResult' and define a call back method using onActivityResult
+Sample Call to other activity using 'startActivityForResult'
+startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+
+
+Sample Result Call back
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    // Check which request we're responding to
+    if (requestCode == PICK_CONTACT_REQUEST) {
+        // Make sure the request was successful
+        if (resultCode == RESULT_OK) {
+            // The user picked a contact.
+            // The Intent's data Uri identifies which contact was selected.
+
+            // Do something with the contact here (bigger example below)
+        }
+    }
+}
+
+
+Q11. How do you communicate between fragment?
+Define an Interface
+
+Q12. What is service?
+
+A Service is an application component that can perform long-running operations in the background, and it does not provide a user interface. Another application component can start a service, and it continues to run in the background even if the user switches to another application
+
+Types of service
+Foreground -> What is foregroung service?
+A foreground service performs some operation that is noticeable to the user. For example, an audio app would use a foreground service to play an audio track. Foreground services must display a status bar icon. Foreground services continue running even when the user isn't interacting with the app.
+
+Background -> What is background service?
+A background service performs an operation that isn't directly noticed by the user. For example, if an app used a service to compact its storage, that would usually be a background service.
+
+Bound
+A bound service offers a client-server interface that allows components to interact with the service, send requests, receive results, and even do so across processes with interprocess communication (IPC). A bound service runs only as long as another application component is bound to it. Multiple components can bind to the service at once, but when all of them unbind, the service is destroyed.
+
+
+Q13. What is the difference between Service and Intent Service, In above mentioned types of service which type it will comes under
+Ans: Background
+When to use?
+
+The Service can be used in tasks with no UI, but shouldn't be too long. If you need to perform long tasks, you must use threads within Service.
+
+The IntentService can be used in long tasks usually with no communication to Main Thread. If communication is required, can use Main Thread handler or broadcast intents. Another case of use is when callbacks are needed (Intent triggered tasks).
+
+How to trigger?
+
+The Service is triggered by calling method startService().
+
+The IntentService is triggered using an Intent, it spawns a new worker thread and the method onHandleIntent() is called on this thread.
+
+Triggered From
+
+The Service and IntentService may be triggered from any thread, activity or other application component.
+Runs On
+
+The Service runs in background but it runs on the Main Thread of the application(This is important).
+
+The IntentService runs on a separate worker thread(This is important).
+
+Limitations / Drawbacks
+
+The Service may block the Main Thread of the application(This is important).
+
+The IntentService cannot run tasks in parallel. Hence all the consecutive intents will go into the message queue for the worker thread and will execute sequentially.
+
+When to stop?
+
+If you implement a Service, it is your responsibility to stop the service when its work is done, by calling stopSelf() or stopService(). (If you only want to provide binding, you don't need to implement this method).
+
+The IntentService stops the service after all start requests have been handled, so you never have to call stopSelf()
+
+
+
+4 degrees of reference - Strong, Weak, Soft, Phantom
+
+Strong - is a kind of reference, which makes the referenced object not eligible for GC. builder classes.
+
+Weak - is a reference which is eligible for GC.
+
+Soft - is a kind of reference whose object is eligible for GC until memory is avaiable. Best for image cache. It will hold them till the memory is available.
+
+Phantom - is a kind of reference whose object is directly eligible for GC. Used only to know when an object is removed from memory.
+
+uses:
+
+Allows you to identify when an object is exactly removed from memory.
+
+when finalize() method is overloaded, then GC might not happen in timely fashion for GC eligible objects of the two classes. So phantom reference makes them eligible for GC before finalize(), is why you can get OutOfMemoryErrors even when most of the heap is garbage.
+
+https://stackoverflow.com/questions/3134683/android-toast-in-a-thread/45922317#45922317
+
+
+

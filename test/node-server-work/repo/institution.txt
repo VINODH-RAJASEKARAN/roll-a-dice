@@ -1,0 +1,97 @@
+[{
+	"fik": "---------------",
+	"fiv": "---------------",
+}, {
+	"fik": "jh7",
+	"fiv": "JH7"
+}, {
+	"fik": "ja1",
+	"fiv": "JA1"
+}, {
+	"fik": "jz5",
+	"fiv": "JZ5"
+}, {
+	"fik": "jz6",
+	"fiv": "JZ6"
+}, {
+	"fik": "ja4",
+	"fiv": "JA4 (GREEN)"
+}, {
+	"fik": "ja3",
+	"fiv": "JA3 (GREEN)"
+}, {
+	"fik": "jh2",
+	"fiv": "JH2 (Silverlake - Orange)"
+}, {
+	"fik": "jh3",
+	"fiv": "JH3 (Silverlake - Orange)"
+}, {
+	"fik": "jc0",
+	"fiv": "JC0 (Episys - Orange)"
+}, {
+	"fik": "jc1",
+	"fiv": "JC1 (CoreDirector - Orange)"
+}, {
+	"fik": "ja5",
+	"fiv": "JA5 (CIF 20/20 - Orange)"
+}, {
+	"fik": "jh4",
+	"fiv": "JH4 (Silverlake - Yellow)"
+}, {
+	"fik": "jh5",
+	"fiv": "JH5 (Episys - Yellow)"
+}, {
+	"fik": "j01",
+	"fiv": "J01 (CoreDirector - Yellow)"
+}, {
+	"fik": "jh0",
+	"fiv": "JH0 (CIF 20/20 - Yellow)"
+}, {
+	"fik": "---------------",
+	"fiv": "----BLUE FI----"
+}, {
+	"fik": "jb0",
+	"fiv": "JB0 (GREEN – Project BLUE)"
+}, {
+	"fik": "jb1",
+	"fiv": "JB1 (GREEN – Project BLUE)"
+}, {
+	"fik": "jb2",
+	"fiv": "JB2 (GREEN - Project BLUE)"
+}, {
+	"fik": "jb4",
+	"fiv": "JB4 (ORANGE - Project BLUE)"
+}, {
+	"fik": "jb5",
+	"fiv": "JB5 (ORANGE - Project BLUE)"
+}, {
+	"fik": "jw1",
+	"fiv": "JW1 (INDIGO - Project BLUE)"
+}, {
+	"fik": "jw2",
+	"fiv": "JW2 (INDIGO - Project BLUE)"
+}, {
+	"fik": "jw3",
+	"fiv": "JW3 (INDIGO - Project BLUE)"
+}, {
+	"fik": "jb6",
+	"fiv": "JB6 (ORANGE - Project BLUE)"
+}, {
+	"fik": "js0",
+	"fiv": "JS0 (PI ENV – Project BLUE)"
+}, {
+	"fik": "js1",
+	"fiv": "JS1 (PI ENV – Project BLUE)"
+}, {
+	"fik": "js2",
+	"fiv": "JS2 (PI ENV – Project BLUE)"
+}, {
+	"fik": "jb3",
+	"fiv": "JB3 (CIF 20/20 - GREEN – Project BLUE)"
+}, {
+	"fik": "jb7",
+	"fiv": "JB7 (CIF 20/20 - ORANGE – Project BLUE)"
+}, {
+	"fik": "jw4",
+	"fiv": "JW4 (CIF 20/20 - INDIGO – Project BLUE)"
+}]

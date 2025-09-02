@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <title>Snake & Ladder</title>
+    <script>
+        function sayHello() {
+            alert("Hello sir...." );
+            var board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            board[3] = +8; board[6] = +11; board[9] = +9; board[10] = +2;
+            board[14] = -10; board[19] = -11; board[22] = -2; board[24] = -8;
+
+            let finalSquare = 25;
+            var square = 0;
+            var diceRoll = 0;
+            while (square < finalSquare) {
+                // roll the dice
+                diceRoll += 1;
+                if (diceRoll == 7) { 
+                    diceRoll = 1; 
+                }
+                document.getElementById("div-container").innerText +=("\ndiceRoll is "+diceRoll);
+                // move by the rolled amount
+                square += diceRoll
+                document.getElementById("div-container").innerText +=("\nafter diceRoll, square is "+square);
+                if (square < board.length) {
+                    // if we're still on the board, move up or down for a snake or a ladder
+                    square += board[square]
+                    document.getElementById("div-container").innerText +=("\nafter snakes or ladders, square is "+square);
+                }
+            }
+            document.getElementById("div-container").innerText +=("\nGame over!");
+        }
+    </script>
+    </head>
+   
+   <body>
+      <div id="div-container">Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪</div>
+      <input type = "button" onclick = "sayHello();" value = "Roll the Dice"/>
+   </body>
+</html>

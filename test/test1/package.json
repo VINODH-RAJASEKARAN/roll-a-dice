@@ -1,0 +1,21 @@
+{
+  "name": "com.org.test",
+  "version": "1.0.0",
+  "description": "node refresh workout",
+  "main": "test4.js",
+  "scripts": {
+    "test": "test_qa",
+    "start": "node test4.js"
+  },
+  "keywords": [
+    "html"
+  ],
+  "author": "vinodh rajasekaran",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "localtunnel": "^2.0.2",
+    "qrcode": "^1.5.3"
+  }
+}

@@ -1,0 +1,13 @@
+<body>
+    <p> Enter the URL to generate QR code!!!</p>
+
+    <form action="/qrcode" method="post">
+            <input type="text" name="user_qrcode" />
+            <button type="submit">Submit</button>
+    </form>
+
+      <% if (generatedQrCode) { %>
+        <img alt="Please enter URL to load" src="<%= generatedQrCode %>" />
+      <% } %>
+
+</body>

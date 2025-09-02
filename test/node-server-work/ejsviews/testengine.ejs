@@ -1,0 +1,68 @@
+<script>
+function loadForm(rowData)
+{
+    //console.log(rowData);
+    //document.getElementById('title').innerHTML;
+    var data = JSON.parse(rowData);
+    document.getElementById('_id').value  = data.id;
+    document.getElementById('title').value  = data.city;
+    document.getElementById('snippet').value  = data.date;
+    document.getElementById('body').value  = data.address;
+}
+
+function formSubmit()
+{
+    if(document.getElementById('_id').value=="") {
+        document.getElementById('formdata').action = "/curd/post-information";
+        console.log(document.getElementById("formdata").action);
+        document.getElementById("formdata").method="post"
+        document.getElementById("formdata").submit();
+    } else {
+        document.getElementById('formdata').action = "/curd/post-information?method=PUT";
+        console.log(document.getElementById("formdata").action);
+        document.getElementById("formdata").method="post";
+        document.getElementById("formdata").submit();
+    }
+}   
+
+</script>
+<body><p>Tesing EJS | <%= title %></p></body>
+<% const name = 'CRUD Operation' %>
+<li><a href="/curd/testform">Post Data <%= name %></a></li>
+<div>
+    <form name="formdata" id="formdata">
+        <input type="hidden" id="_id" name="_id" required />
+        <label for="title">Blog title:</label>
+        <input type="text" id="title" name="title" required />
+        <label for="snippet">Blog snippet:</label>
+        <input type="text" id="snippet" name="snippet" required />
+        <label for="body">Blog body:</label>
+        <textarea id="body" name="body" required></textarea>
+        <button onclick="formSubmit()">Submit</button>
+    </form>
+</div>
+<div>
+    <% rowdata.forEach((row) => { %>
+        <p>--------------------------------------------</p>
+        <div onclick="loadForm('<%= JSON.stringify(row) %>')">
+            <p><%= (row.city); %></p>
+            <p><%= (row.date); %></p>
+            <p><%= (row.address); %></p>
+        </div>
+        <button onclick="deleteRow('<%= row.id %>')" data-doc="<%= row.id %>">Delete</button>
+        <p>--------------------------------------------</p>
+    <% }); %>  
+</div>
+<script>
+    function deleteRow(_id)
+    {
+        const endpoint = `/curd/delete-row/${_id}`;
+        console.log(endpoint);
+        fetch(endpoint, {
+            method: 'DELETE'
+        })
+        .then((response) => response.json())
+        .then((data) => window.location.href= data.redirect)
+        .catch(err => console.log(err));
+    }
+</script>
