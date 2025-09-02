@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Assistance</title>
+  <style>
+    textarea {
+      width: 100%;
+      /* Use percentage for width */
+      height: 150px;
+      /* Fixed height */
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      resize: both;
+      box-sizing: border-box;
+      /* Include padding and border in the element's total width and height */
+    }
+
+    div {
+      width: 100%;
+      /* Use percentage for width */
+      min-height: 150px;
+      height: auto;
+      /* Fixed height */
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      resize: both;
+      box-sizing: border-box;
+      /* Include padding and border in the element's total width and height */
+    }
+
+    pre {
+      width: 100%;
+      white-space:pre-wrap;
+      /* Use percentage for width */
+      min-height: 150px;
+      height: auto;
+      /* Fixed height */
+      padding: 10px;
+    }
+
+    @media (max-width: 600px) {
+      textarea {
+        height: 100px;
+        /* Adjust height for smaller screens */
+        font-size: 12px;
+        /* Adjust font size for smaller screens */
+      }
+
+      div {
+        height: 100px;
+        /* Adjust height for smaller screens */
+        font-size: 12px;
+        /* Adjust font size for smaller screens */
+      }
+    }
+
+    .content {
+      line-height: 1.375;
+      white-space: pre-wrap;
+      padding: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea id="snippet"></textarea>
+  <button onclick="askSubmit()">Ask</button>
+  <pre id="result"></pre>
+</body>
+
+</html>
+
+<script>
+  async function askSubmit() {
+    try {
+      const apiUrl = "/load-index"
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("user-data", encodeURI((document.getElementById('snippet').value).trim()));
+
+      const request1 = new Request(apiUrl, {
+        method: 'PUT',
+        headers: myHeaders,
+      });
+
+      getData(request1);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function getData(request) {
+    try {
+      document.getElementById('result').innerHTML = "";
+      const response = await fetch(request);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const stream = response.body.pipeThrough(new TextDecoderStream());
+      for await (const value of stream) {
+        console.log(value, "\n");
+        document.getElementById('result').innerHTML = document.getElementById('result').innerHTML + value + "<br/><br/>";
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+</script>

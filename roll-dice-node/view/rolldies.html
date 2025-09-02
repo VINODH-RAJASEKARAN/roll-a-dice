@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roll dice</title>
+  <style>
+    .dice {
+      width: 150px;
+      height: 150px;
+      padding: 0%;
+      margin: 0px;
+    }
+
+    .dice-button {
+      width: 180px;
+      height: 100px;
+      font-size: 25px;
+      padding: 0%;
+      margin: 0px;
+    }
+
+    .centered {
+      margin: 0px;
+      display: flex;
+      width: 100vw;
+      /*height: 100vh;*/
+      justify-content: center;
+      /* align-items: center; */
+    }
+
+    .container {
+      margin: 0px;
+      /* outline: dashed 1px black; 
+      /* Center child horizontally*/
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body translate="no">
+  <div class="centered">
+    <div style="margin-top: 50px;">
+      <div class="container">
+        <img id="dice" class="dice" src="res_pub/Die00.png">
+      </div>
+      <div style="margin-top: 20px;">
+        <button id="dice-button" class="dice-button" type="button" onclick="rollDice();">Roll the dice</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+  var path = '';
+  const dice = document.querySelector('#dice');
+  const diceButton = document.getElementById("dice-button");
+
+  function randomIntFromInterval() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  function changeDiceImagePath(result) {
+    switch (result) {
+      case 1:
+        path = "res_pub/Die1.svg";
+        break;
+      case 2:
+        path = "res_pub/Die2.svg";
+        break;
+      case 3:
+        path = "res_pub/Die3.svg";
+        break;
+      case 4:
+        path = "res_pub/Die4.svg";
+        break;
+      case 5:
+        path = "res_pub/Die5.svg";
+        break;
+      case 6:
+        path = "res_pub/Die6.svg";
+        break;
+      default:
+        path = "res_pub/Die00.png";
+        break;
+    }
+  }
+
+  function changeDiceNumber() {
+    dice.setAttribute("src", path);
+  }
+
+  function rollDice() {
+    diceButton.disabled = true;
+    changeDiceImagePath(-1);
+    changeDiceNumber();
+    setTimeout(rollDiceLogic, 1300);
+    return false;
+  }
+
+  function rollDiceLogic() {
+    // var randomDiceNumber = randomIntFromInterval();
+    // console.log(randomDiceNumber);
+    changeDiceImagePath(randomIntFromInterval());
+    changeDiceNumber();
+    diceButton.disabled = false;
+  }
+</script>

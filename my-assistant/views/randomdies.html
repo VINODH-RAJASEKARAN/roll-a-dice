@@ -1,0 +1,111 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>Roll the dice (random number generator) Javascript</title>
+
+    <link rel="canonical" href="https://codepen.io/M-Araujo/pen/OzdrQB">
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+<style>
+.main-content {
+  margin-top:50px;
+}
+
+.block-container {
+  width: 50%;
+  float:left;
+}
+
+.dice {
+  border-radius: 10px;
+  width:50px;
+  height:50px;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="container col-sm-12 col-md-5 main-content">
+    <div class="block-container">
+    <button type="button" onclick="rollDice();" class="btn btn-primary">Roll the dice</button>
+    </div>
+    <div class="block-container">
+    <!--<div id="dice"></div>-->
+      <img id="dice" class="dice" src="https://openclipart.org/download/282130/Die4.svg">
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script id="rendered-js">
+var path = '';
+
+function generateRandomNumber() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+
+function defineImgPath(result) {
+  switch (result) {
+    case 1:
+      path = "https://openclipart.org/download/282127/Die";
+      break;
+    case 2:
+      path = "https://openclipart.org/download/282128/Die";
+      break;
+    case 3:
+      path = "https://openclipart.org/download/282129/Die";
+      break;
+    case 4:
+      path = "https://openclipart.org/download/282130/Die";
+      break;
+    case 5:
+      path = "https://openclipart.org/download/282131/Die";
+      break;
+    case 6:
+      path = "https://openclipart.org/download/282132/Die";
+      break;}
+
+}
+
+function changeDiceFace(result) {
+  var dice = document.querySelector('#dice');
+  dice.setAttribute("src", path + result + ".svg");
+}
+
+function rollDice() {
+  var result = generateRandomNumber();
+  defineImgPath(result);
+  changeDiceFace(result);
+
+  return false;
+}
+//# sourceURL=pen.js
+    </script>
+
+  
+
+
+
+</body></html>
